@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text Sizes -->
+    <dimen name="text_size_x_small">12sp</dimen>
+    <dimen name="text_size_small">13sp</dimen>
+    <dimen name="text_size_normal">15sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_xlarge">20sp</dimen>
+
+    <!-- Paddings -->
+    <dimen name="text_padding_default">16dp</dimen>
+
+    <!-- Margins -->
+    <dimen name="margin_x_small">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_viewpager">40dp</dimen>
+    <dimen name="margin_indicator">10dp</dimen>
+
+    <!-- Error -->
+    <dimen name="error_placeholder_size">150dp</dimen>
+
+    <!-- Banner -->
+    <dimen name="banner_height">256dp</dimen>
+
+    <!-- Movie -->
+    <dimen name="movie_poster_size">104dp</dimen>
+    <dimen name="movie_right_margin">28dp</dimen>
+</resources>

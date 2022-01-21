@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Movies Case</string>
+    <string name="movie_title">Spider-Man: No Way Home (2021)</string>
+    <string name="movie_release_date">15.06.2021</string>
+    <string name="movie_overview">Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero.
+        When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.</string>
+    <string name="error_no_movie_found">No Movie Found :(</string>
+</resources>
