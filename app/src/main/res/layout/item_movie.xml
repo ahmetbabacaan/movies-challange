@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import
+            alias="R"
+            type="com.ahmetbabacan.movies.R" />
+
+        <variable
+            name="movie"
+            type="com.ahmetbabacan.movies.data.models.Movie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="@dimen/text_padding_default"
+        tools:ignore="UnusedAttribute">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/itemMovie_ivPoster"
+            imageUrl="@{movie.poster_path}"
+            placeHolderDrawable="@{R.drawable.movie_placeholder}"
+            android:layout_width="@dimen/movie_poster_size"
+            android:layout_height="@dimen/movie_poster_size"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="H,16:9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/movie_placeholder" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemMovie_tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:gravity="left"
+            android:maxLines="3"
+            title="@{movie}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/fragmentHome_rightGuideline"
+            app:layout_constraintStart_toEndOf="@id/itemMovie_ivPoster"
+            app:layout_constraintTop_toTopOf="@id/itemMovie_ivPoster"
+            tools:text="@string/movie_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemMovie_tvDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:maxLines="2"
+            android:text="@{movie.overview}"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintEnd_toEndOf="@id/fragmentHome_rightGuideline"
+            app:layout_constraintStart_toEndOf="@id/itemMovie_ivPoster"
+            app:layout_constraintTop_toBottomOf="@id/itemMovie_tvTitle"
+            tools:text="@string/movie_overview" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{movie.release_date}"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/text_size_x_small"
+            app:layout_constraintBottom_toBottomOf="@id/itemMovie_ivPoster"
+            app:layout_constraintEnd_toEndOf="@id/fragmentHome_rightGuideline"
+            tools:text="@string/movie_release_date" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/fragmentHome_rightGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/movie_right_margin" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow">
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

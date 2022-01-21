@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ahmetbabacan.movies.ui.home.HomeViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.ahmetbabacan.movies.ui.adapters.MovieAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/fragmentHome_swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragmentHome_rvMovies"
+                adapter="@{adapter}"
+                adapterMovieList="@{viewModel.nowPlayingLiveData}"
+                gone="@{viewModel.error}"
+                android:visibility="visible"
+                paginator="@{viewModel}"
+                toast="@{viewModel.toast}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:fadeScrollbars="false"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbarThumbVertical="@drawable/scrollbar"
+                android:scrollbars="vertical"
+                app:itemAnimator="@{null}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_movie" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <LinearLayout
+            android:id="@+id/fragmentHome_llErrorView"
+            gone="@{!viewModel.error}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/error_placeholder_size"
+                android:layout_height="@dimen/error_placeholder_size"
+                app:srcCompat="@drawable/ic_movie"
+                app:tint="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fragmentHome_tvError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{viewModel.errorText}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_large"
+                tools:text="No movie found" />
+
+        </LinearLayout>
+
+
+        <ProgressBar
+            android:id="@+id/fragmentHome_pbLoading"
+            gone="@{!viewModel.loading}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
