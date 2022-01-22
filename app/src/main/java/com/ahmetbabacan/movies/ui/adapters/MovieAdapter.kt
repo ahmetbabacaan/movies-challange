@@ -1,6 +1,7 @@
 package com.ahmetbabacan.movies.ui.adapters
 
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import androidx.viewpager2.widget.ViewPager2
@@ -8,6 +9,8 @@ import com.ahmetbabacan.movies.R
 import com.ahmetbabacan.movies.data.models.Movie
 import com.ahmetbabacan.movies.databinding.ItemMovieBinding
 import com.ahmetbabacan.movies.databinding.LayoutViewpagerBinding
+import com.ahmetbabacan.movies.ui.home.HomeFragmentDirections
+import com.ahmetbabacan.movies.ui.home.ViewPagerAdapter
 import com.skydoves.bindables.binding
 
 class MovieAdapter(private val listener: ViewPagerAdapter.ItemClickedListener) :
@@ -30,6 +33,9 @@ class MovieAdapter(private val listener: ViewPagerAdapter.ItemClickedListener) :
                         val position = bindingAdapterPosition.takeIf { pos -> pos != NO_POSITION }
                             ?: return@setOnClickListener
                         listener.onItemClicked(viewPagerLastPosition)
+                        it.findNavController().navigate(
+                            HomeFragmentDirections.actionHomeFragmentToDetailFragment(items[position])
+                        )
                     }
                 }
             }
@@ -83,6 +89,11 @@ class MovieAdapter(private val listener: ViewPagerAdapter.ItemClickedListener) :
                     layoutViewPagerIndicator.setupWithViewPager(layoutViewPagerViewPager)
                     if (viewPagerLastPosition != -1) {
                         layoutViewPagerViewPager.setCurrentItem(viewPagerLastPosition, false)
+                    }
+                    root.setOnClickListener {
+                        it.findNavController().navigate(
+                            HomeFragmentDirections.actionHomeFragmentToDetailFragment(items[position])
+                        )
                     }
                 }
             }

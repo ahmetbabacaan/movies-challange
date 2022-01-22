@@ -1,4 +1,4 @@
-package com.ahmetbabacan.movies.ui.adapters
+package com.ahmetbabacan.movies.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,6 +22,9 @@ class ViewPagerAdapter(private val listener: ItemClickedListener) :
                     bindingAdapterPosition.takeIf { pos -> pos != RecyclerView.NO_POSITION }
                         ?: return@setOnClickListener
                 listener.onItemClicked(position)
+                it.findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(items[position])
+                )
             }
         }
     }

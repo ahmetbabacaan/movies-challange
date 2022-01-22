@@ -8,6 +8,7 @@ import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 import coil.load
 import com.ahmetbabacan.movies.data.models.Movie
+import com.ahmetbabacan.movies.data.responses.DetailResponse
 import com.ahmetbabacan.movies.util.Constants.baseImageUrl
 
 
@@ -35,6 +36,14 @@ object ViewBinding {
     }
 
     @JvmStatic
+    @BindingAdapter("backgroundImageUrl")
+    fun loadBackground(view: ImageView, imageUrl: String?) {
+        view.load(baseImageUrl + imageUrl) {
+            crossfade(true)
+        }
+    }
+
+    @JvmStatic
     @BindingAdapter("gone")
     fun bindGone(view: View, shouldBeGone: Boolean) {
         view.visibility = if (shouldBeGone) {
@@ -54,4 +63,13 @@ object ViewBinding {
         }
     }
 
+    @JvmStatic
+    @BindingAdapter("titleDetail")
+    fun bindTitleWithDetailResponse(view: TextView, movie: DetailResponse) {
+        if (movie.release_date != null) {
+            view.text = "${movie.title} (${movie.release_date.substring(0, 4)})"
+        } else {
+            view.text = movie.title
+        }
+    }
 }

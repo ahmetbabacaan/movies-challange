@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import
+            alias="R"
+            type="com.ahmetbabacan.movies.R" />
+
+        <variable
+            name="viewModel"
+            type="com.ahmetbabacan.movies.ui.detail.DetailViewModel" />
+
+        <variable
+            name="movie"
+            type="com.ahmetbabacan.movies.data.responses.DetailResponse" />
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fragmentDetail_ivBackground"
+                backgroundImageUrl="@{viewModel.detailResponse.backdrop_path}"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/banner_height"
+                android:scaleType="centerCrop"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fragmentDetail_ivForeground"
+                app:srcCompat="@drawable/bg_gradient"
+                gone="@{viewModel.loading}"
+                android:layout_width="0dp"
+                android:alpha="0.4"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/fragmentDetail_ivBackground"
+                app:layout_constraintLeft_toLeftOf="@id/fragmentDetail_ivBackground"
+                app:layout_constraintRight_toRightOf="@id/fragmentDetail_ivBackground"
+                app:layout_constraintTop_toTopOf="@id/fragmentDetail_ivBackground" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/fragmentDetail_leftGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/text_padding_default" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/fragmentDetail_rightGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/text_padding_default" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fragmentDetail_ivImdb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_padding_default"
+                app:layout_constraintLeft_toLeftOf="@id/fragmentDetail_leftGuideline"
+                app:layout_constraintTop_toBottomOf="@id/fragmentDetail_ivBackground"
+                app:srcCompat="@drawable/ic_imdb" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fragmentDetail_ivStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_small"
+                app:layout_constraintBottom_toBottomOf="@id/fragmentDetail_ivImdb"
+                app:layout_constraintLeft_toRightOf="@id/fragmentDetail_ivImdb"
+                app:layout_constraintTop_toTopOf="@id/fragmentDetail_ivImdb"
+                app:srcCompat="@drawable/ic_star" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_x_small"
+                android:textColor="@color/black"
+                android:text="@{String.valueOf(movie.vote_average)}"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintBottom_toBottomOf="@id/fragmentDetail_ivImdb"
+                app:layout_constraintLeft_toRightOf="@id/fragmentDetail_ivStar"
+                app:layout_constraintTop_toTopOf="@id/fragmentDetail_ivImdb"
+                tools:text="7.8" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvRatingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/10"
+                android:textColor="@color/lightGray"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintBottom_toBottomOf="@id/fragmentDetail_ivImdb"
+                app:layout_constraintLeft_toRightOf="@id/fragmentDetail_tvRating"
+                app:layout_constraintTop_toTopOf="@id/fragmentDetail_ivImdb" />
+
+
+            <View
+                android:id="@+id/fragmentDetail_seperator"
+                android:layout_width="@dimen/margin_x_small"
+                android:layout_height="@dimen/margin_x_small"
+                android:layout_marginStart="@dimen/margin_small"
+                android:background="@drawable/circle"
+                app:layout_constraintBottom_toBottomOf="@id/fragmentDetail_ivImdb"
+                app:layout_constraintLeft_toRightOf="@id/fragmentDetail_tvRatingLabel"
+                app:layout_constraintTop_toTopOf="@id/fragmentDetail_ivImdb" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small"
+                android:text="@{movie.release_date}"
+                app:layout_constraintBottom_toBottomOf="@id/fragmentDetail_ivImdb"
+                app:layout_constraintLeft_toRightOf="@id/fragmentDetail_seperator"
+                app:layout_constraintTop_toTopOf="@id/fragmentDetail_ivImdb"
+                tools:text="15.06.2021" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_padding_default"
+                android:gravity="start"
+                titleDetail="@{movie}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_xlarge"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@id/fragmentDetail_leftGuideline"
+                app:layout_constraintRight_toRightOf="@id/fragmentDetail_rightGuideline"
+                app:layout_constraintTop_toBottomOf="@id/fragmentDetail_ivImdb"
+                tools:text="@string/movie_title" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvOverview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_padding_default"
+                android:gravity="start"
+                android:text="@{viewModel.detailResponse.overview}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_normal"
+                app:layout_constraintLeft_toLeftOf="@id/fragmentDetail_leftGuideline"
+                app:layout_constraintRight_toRightOf="@id/fragmentDetail_rightGuideline"
+                app:layout_constraintTop_toBottomOf="@id/fragmentDetail_tvTitle"
+                tools:text="@string/movie_overview" />
+
+            <ProgressBar
+                android:id="@+id/fragmentDetail_pbLoading"
+                gone="@{!viewModel.loading}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>
